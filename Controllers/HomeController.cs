@@ -17,17 +17,27 @@ namespace TrabajoFinal_IGBD.Controllers
             return View();
         }
 
-        
-
-        public IActionResult Privacy()
+        public IActionResult Nosotros()
         {
+
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
+        public IActionResult Habitaciones()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+
+            return View();
+        }
+
+        public IActionResult Servicios()
+        {
+
+            return View();
+        }
+        public IActionResult Reservas()
+        {
+
+            return View();
         }
     }
 }
