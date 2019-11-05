@@ -9,7 +9,9 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-
+using Microsoft.EntityFrameworkCore;
+using TrabajoFinal_IGBD.Models;
+using Microsoft.AspNetCore.Identity;
 namespace TrabajoFinal_IGBD
 {
     public class Startup
@@ -29,6 +31,27 @@ namespace TrabajoFinal_IGBD
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
                 options.CheckConsentNeeded = context => true;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
+            
+            services.AddDbContext<HotelContext>(
+                o => o.UseMySql("server=localhost;user=root;password=;database=hotelPiero;")
+            );
+
+            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<HotelContext>();
+
+            services.Configure<IdentityOptions>(options =>
+            {
+                // Password settings.
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+            });
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/Cuenta/Login";
+                options.AccessDeniedPath = "/Cuenta/AccesoDenegado";
             });
 
 
@@ -52,6 +75,7 @@ namespace TrabajoFinal_IGBD
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+            app.UseAuthentication();
 
             app.UseMvc(routes =>
             {
