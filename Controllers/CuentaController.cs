@@ -10,59 +10,22 @@ namespace TrabajoFinal_IGBD.Controllers
         private HotelContext _context;
         private SignInManager<IdentityUser> _sim;
         private UserManager<IdentityUser> _um;
-        private RoleManager<IdentityRole> _rm;
+
         public CuentaController(
             HotelContext c,  
             SignInManager<IdentityUser> s,
-            UserManager<IdentityUser> um,
-            RoleManager<IdentityRole> rm) {
+            UserManager<IdentityUser> um) {
 
             _context = c;
             _sim = s;
             _um = um;
-            _rm = rm;
         }
 
-        public IActionResult AsociarRol()
-        {
-            ViewBag.Usuarios = _um.Users.ToList();
-            ViewBag.Roles = _rm.Roles.ToList();
-
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult AsociarRol(string usuario, string rol) {
-            var user = _um.FindByIdAsync(usuario).Result;
-
-            var resultado = _um.AddToRoleAsync(user, rol).Result;
-
-            return RedirectToAction("index", "home");
-        }
-
-        public IActionResult CrearRol()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        public IActionResult CrearRol(string nombre)
-        {
-            var rol = new IdentityRole();
-            rol.Name = nombre;
-
-            var resultado = _rm.CreateAsync(rol).Result;
-
-            return RedirectToAction("index", "home");
-        }
 
         public IActionResult Crear() {
             return View();
         }
 
-        public IActionResult AccesoDenegado() {
-            return View();
-        }
 
         [HttpPost]
         public IActionResult Crear(CrearCuentaViewModel model) {
@@ -73,9 +36,6 @@ namespace TrabajoFinal_IGBD.Controllers
                 usuario.Email = model.Correo;
 
                 IdentityResult resultado = _um.CreateAsync(usuario, model.Password1).Result;
-                var r = _um.AddToRoleAsync(usuario, "Usuario").Result;
-
-
                 if (resultado.Succeeded) {
                     return RedirectToAction("index", "home");
                 }
