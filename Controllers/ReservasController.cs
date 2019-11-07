@@ -16,6 +16,7 @@ namespace TrabajoFinal_IGBD.Controllers
             var lista = _context.Reservas.ToList();
             return View(lista);
         }
+        
         public IActionResult Registro()
         {
             ViewBag.Habitaciones = _context.Habitaciones.ToList();

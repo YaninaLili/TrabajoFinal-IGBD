@@ -27,7 +27,7 @@ namespace TrabajoFinal_IGBD.Controllers
             if (ModelState.IsValid) {
                 _context.Add(x);
                 _context.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Habitaciones","Index");
             }
             return View(x);
         }

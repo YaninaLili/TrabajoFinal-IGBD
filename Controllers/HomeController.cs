@@ -13,30 +13,26 @@ namespace TrabajoFinal_IGBD.Controllers
         
         public IActionResult Index()
         {
-
             return View();
         }
 
         public IActionResult Nosotros()
         {
-
             return View();
         }
 
         public IActionResult Habitaciones()
         {
-
             return View();
         }
 
         public IActionResult Servicios()
         {
-
             return View();
         }
+
         public IActionResult Reservas()
         {
-
             return View();
         }
     }
