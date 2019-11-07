@@ -1,0 +1,39 @@
+@model Reserva
+
+<h1>Reserva</h1>
+
+<form method="post">
+    <div asp-validation-summary="All"></div>
+
+    <div class="form-group">
+        <label asp-for="DNI"></label>
+        <input asp-for="DNI" class="form-control">
+    </div>
+    <div class="form-group">
+        <label asp-for="Nombre"></label>
+        <input asp-for="Nombre" class="form-control">
+    </div>
+    <div class="form-group">
+        <label asp-for="Apellido"></label>
+        <input asp-for="Apellido" class="form-control">
+    </div>
+    <div class="form-group">
+        <label asp-for="Correo"></label>
+        <textarea asp-for="Correo" rows="3" class="form-control"></textarea>
+    </div>
+    <div class="form-group">
+        <label asp-for="Celular"></label>
+        <textarea asp-for="Celular" rows="10" class="form-control"></textarea>
+    </div>
+    <div class="form-group">
+        <label asp-for="Habitacion"></label>
+        <select asp-for="HabitacionId" class="form-control">
+            @foreach (var item in (List<Habitacion>)ViewBag.Habitaciones)
+            {
+                <option value="@item.Id">@item.Nombre</option>
+            }
+        </select>
+    </div>
+    
+    <button class="btn btn-primary">Registrar</button>
+</form>
